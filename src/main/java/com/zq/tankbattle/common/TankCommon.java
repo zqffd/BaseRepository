@@ -1,6 +1,5 @@
 package com.zq.tankbattle.common;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -35,7 +34,8 @@ public class TankCommon {
     }
 
     //私有化，不让其它类new这个对象
-    private TankCommon() {}
+    private TankCommon() {
+    }
 
 
     /**
@@ -43,7 +43,9 @@ public class TankCommon {
      * Date: 2023/12/18
      * Decription: 返回int类型的值
      */
-    public static Integer getIntValue(String key) {return Integer.parseInt((String) mainConfig(key));}
+    public static Integer getIntValue(String key) {
+        return Integer.parseInt((String) mainConfig(key));
+    }
 
 
     /**
@@ -51,8 +53,9 @@ public class TankCommon {
      * Date: 2023/12/18
      * Decription: 返回字符串类型的值
      */
-    public static String getStringValue(String key) {return (String) mainConfig(key);}
-
+    public static String getStringValue(String key) {
+        return (String) mainConfig(key);
+    }
 
 
     /**
@@ -64,8 +67,8 @@ public class TankCommon {
         try {
             //只需要加载一次，这里采用懒加载方式
             if (ObjectUtils.isEmpty(properties)) {
-                synchronized (TankCommon.class){
-                    if (ObjectUtils.isEmpty(properties)){
+                synchronized (TankCommon.class) {
+                    if (ObjectUtils.isEmpty(properties)) {
                         properties = new Properties();
                         properties.load(new FileInputStream(ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "application-dev.properties")));
                     }
@@ -82,9 +85,9 @@ public class TankCommon {
 
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
-            new Thread(()->{
+            new Thread(() -> {
                 String badTankName = getStringValue("badTankName");
-                System.out.println(properties.hashCode()+"："+badTankName);
+                System.out.println(properties.hashCode() + "：" + badTankName);
             }).start();
         }
 

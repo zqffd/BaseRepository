@@ -9,6 +9,7 @@ import java.io.InputStream;
 /**
  * 作者:ZQ
  * 时间:2023/12/14 14:04
+ * 针对图片加载
  */
 public class Utils {
     /**

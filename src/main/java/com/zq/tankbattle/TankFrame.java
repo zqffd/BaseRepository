@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * 作者:ZQ
  * 时间:2023/12/13 15:28
+ * 游戏运行基本实体类
  */
 //继承Frame后，自己就是一个窗口对象
 public class TankFrame extends Frame {
@@ -33,7 +34,11 @@ public class TankFrame extends Frame {
     //敌方坦克
     List<Tank> tankList = new ArrayList<>();
 
+    //炸弹特效集合
     List<Explode> blowUpList = new ArrayList<>();
+
+    //杀敌数
+    List<Explode> killsList = new ArrayList<>();
 
     int x1 = 200;
     int y1 = 200;

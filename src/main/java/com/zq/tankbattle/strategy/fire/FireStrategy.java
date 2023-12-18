@@ -9,7 +9,7 @@ import com.zq.tankbattle.Tank;
  */
 public interface FireStrategy {
 
-    //发射
+    //开火
     void fire(Tank tank);
 
 

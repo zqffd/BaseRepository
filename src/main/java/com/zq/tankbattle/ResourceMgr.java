@@ -19,13 +19,16 @@ public class ResourceMgr {
     public static BufferedImage bulletL, bulletR, bulletU, bulletD, bulletUL, bulletDL, bulletUR, bulletDR;
     public static BufferedImage meBulletL, meBulletR, meBulletU, meBulletD, meBulletUL, meBulletDL, meBulletUR, meBulletDR;
     public static BufferedImage[] blowUpList = new BufferedImage[16];
+    public static BufferedImage hp100, hp80, hp60, hp40, hp20;
 
     private static final ResourceMgr RESOURCE_MGR = new ResourceMgr();
 
-    public static ResourceMgr getInstance(){return ResourceMgr.RESOURCE_MGR;}
+    public static ResourceMgr getInstance() {
+        return ResourceMgr.RESOURCE_MGR;
+    }
 
-    private ResourceMgr() {}
-
+    private ResourceMgr() {
+    }
 
 
     //class加载到内存的时候，直接加载所有文件
@@ -72,6 +75,12 @@ public class ResourceMgr {
             meBulletUR = ImageUtil.rotateImage(meBulletU, 45);
             meBulletDR = ImageUtil.rotateImage(meBulletD, -45);
             meBulletDL = ImageUtil.rotateImage(meBulletD, 45);
+
+            hp100 = ImageIO.read(new Utils().getStaticFile(PathUtils.HP.path() + "100%.png"));
+            hp80 = ImageIO.read(new Utils().getStaticFile(PathUtils.HP.path() + "80%.png"));
+            hp60 = ImageIO.read(new Utils().getStaticFile(PathUtils.HP.path() + "60%.png"));
+            hp40 = ImageIO.read(new Utils().getStaticFile(PathUtils.HP.path() + "40%.png"));
+            hp20 = ImageIO.read(new Utils().getStaticFile(PathUtils.HP.path() + "20%.png"));
 
             for (int i = 0; i < 16; i++) {
                 File staticFile = new Utils().getStaticFile(PathUtils.VTF.path() + "e" + (i + 1) + ".gif");

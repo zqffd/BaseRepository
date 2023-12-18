@@ -7,6 +7,7 @@ import com.zq.tankbattle.common.TankCommon;
 /**
  * 作者:ZQ
  * 时间:2023/12/13 15:07
+ * 启动类
  */
 public class TankMain {
     public static void main(String[] args) throws InterruptedException {

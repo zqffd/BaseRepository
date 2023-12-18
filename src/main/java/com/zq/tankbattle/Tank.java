@@ -14,6 +14,7 @@ import java.util.Random;
 /**
  * 作者:ZQ
  * 时间:2023/12/14 9:20
+ * 坦克实体类
  */
 @Data
 public class Tank {
@@ -38,7 +39,15 @@ public class Tank {
     //是否活着
     private boolean living = true;
 
+    public static BufferedImage hpMgr = ResourceMgr.hp100;
+
     private TankFrame tf = null;
+
+    int  HP = 100;
+
+    int num = 0;
+
+
 
     //当前坦克的宽高
     public static int WIDTH = ResourceMgr.tankD.getWidth();
@@ -74,6 +83,8 @@ public class Tank {
     public void paint(Graphics g) {
         BufferedImage tankD;
         if (!living) tf.tankList.remove(this);
+        selectHPMgr(HP);
+        g.drawImage(hpMgr,this.x+6,this.y-10,null);
 
         if (group == Group.BAD) {
             tankD = ResourceMgr.tankR;
@@ -179,8 +190,6 @@ public class Tank {
         if (this.y < 28) y = 28;
         if (this.x > TankFrame.GAME_WIDIH - Tank.WIDTH - 2) x = TankFrame.GAME_HEIGHT - Tank.WIDTH - 2;
         if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2) y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
-
-
     }
 
     /**
@@ -198,7 +207,13 @@ public class Tank {
      * Decription: 坦克死亡
      */
     public void die() {
-        this.living = false;
+        HP = this.HP-20;
+        if (num == 100/20){
+            this.living = false;
+        }else {
+            num++;
+            selectHPMgr(this.HP);
+        }
         int eX = this.x + Tank.WIDTH / 2 - Explode.WIDTH / 2;
         int eY = this.y + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
         tf.blowUpList.add(new Explode(eX, eY, tf));
@@ -275,5 +290,31 @@ public class Tank {
      */
     public Rectangle rect() {
         return rect;
+    }
+
+
+    public void selectHPMgr(int hp){
+        switch (hp){
+            case 100:
+                hpMgr=ResourceMgr.hp100;
+
+                break;
+            case 80:
+                hpMgr=ResourceMgr.hp80;
+                break;
+            case 60:
+                hpMgr=ResourceMgr.hp60;
+                break;
+            case 40:
+                hpMgr=ResourceMgr.hp40;
+                break;
+            case 20:
+                hpMgr=ResourceMgr.hp20;
+                break;
+            default:
+                hpMgr = null;
+                break;
+        }
+
     }
 }

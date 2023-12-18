@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * 作者:ZQ
  * 时间:2023/12/13 14:02
+ * 启动类
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableScheduling

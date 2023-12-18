@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 /**
  * 作者:ZQ
  * 时间:2023/12/14 10:03
- * 发射炮弹（默认模式）
+ * 发射炮弹实体类
  */
 public class Shell{
 

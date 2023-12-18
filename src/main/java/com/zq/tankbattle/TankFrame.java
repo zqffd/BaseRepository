@@ -1,5 +1,9 @@
 package com.zq.tankbattle;
 
+import com.zq.tankbattle.strategy.fire.impl.DefaultFireStrategy;
+import com.zq.tankbattle.strategy.fire.impl.FlayFireStrategy;
+import com.zq.tankbattle.strategy.fire.impl.ShotFireStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -34,7 +38,6 @@ public class TankFrame extends Frame {
     int x1 = 200;
     int y1 = 200;
     int a = 0;
-
 
     //无参在被执行new后会执行初始化
     public TankFrame() throws HeadlessException {
@@ -172,6 +175,9 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_D:
                     D = true;
                     break;
+                case KeyEvent.VK_SHIFT:
+                    tank.goodSpeed=6;
+                    break;
 //                //空格
 //                case KeyEvent.VK_SPACE:
 //                    tank.fire();
@@ -204,9 +210,22 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_D:
                     D = false;
                     break;
-                //空格
+                //空格单发
                 case KeyEvent.VK_SPACE:
-                    tank.fire();
+                    tank.fire(DefaultFireStrategy.getInstance());
+                    break;
+                //R 散射
+                case KeyEvent.VK_R:
+                    tank.fire(ShotFireStrategy.getInstance());
+                    break;
+                case KeyEvent.VK_Q:
+                    tank.fire(FlayFireStrategy.getInstance());
+                    break;
+                //shift 加速
+                case KeyEvent.VK_SHIFT:
+                    tank.goodSpeed=3;
+                    break;
+                default:
                     break;
             }
             setMainTankDir();

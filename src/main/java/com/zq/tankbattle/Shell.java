@@ -2,18 +2,16 @@ package com.zq.tankbattle;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * 作者:ZQ
  * 时间:2023/12/14 10:03
- * 发射炮弹
+ * 发射炮弹（默认模式）
  */
-public class Shell {
+public class Shell{
 
     //移动速度
-    private static final int SPEED = 10;
+    public static final int SPEED = 10;
 
     //大小
     public static  int WIDTH = ResourceMgr.bulletD.getWidth();
@@ -24,25 +22,23 @@ public class Shell {
     int x, y;
 
     //子弹方向
-    private Dir dir;
+    public Dir dir;
 
     //子弹颜色
-    private Color color = Color.BLACK;
+    public Color color = Color.BLACK;
 
     //子弹是否活着(子弹飞出画面就死了，子弹打中其它坦克也死了)
-    private boolean living = true;
+    public boolean living = true;
 
     //区分敌方子弹还是我方子弹
-    private Group group = Group.BAD;
+    public Group group = Group.BAD;
 
-    private TankFrame tf;
+    public TankFrame tf;
 
     public  Rectangle rect =  new Rectangle();
 
 
-
-
-    public Shell(int x, int y, Dir dir,Group group ,TankFrame tf) {
+    public Shell(int x, int y, Dir dir, Group group , TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -52,6 +48,8 @@ public class Shell {
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        tf.shellList.add(this);
     }
 
 
@@ -59,7 +57,7 @@ public class Shell {
         if (!living) {
             tf.shellList.remove(this);
         }
-        BufferedImage tankD = ResourceMgr.tankD;
+        BufferedImage tankD = null;
 
         switch (dir){
             case DOWN:
@@ -86,10 +84,14 @@ public class Shell {
             case UR:
                 tankD = ResourceMgr.bulletUR;
                 break;
-
+            default:
+                break;
         }
+
+
         //画一张图片
         g.drawImage(tankD,x,y,null);
+
 
 
 

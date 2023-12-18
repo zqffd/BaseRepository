@@ -22,9 +22,7 @@ public class ResourceMgr {
 
     private static final ResourceMgr RESOURCE_MGR = new ResourceMgr();
 
-    public static ResourceMgr getInstance(){
-        return ResourceMgr.RESOURCE_MGR;
-    }
+    public static ResourceMgr getInstance(){return ResourceMgr.RESOURCE_MGR;}
 
     private ResourceMgr() {}
 

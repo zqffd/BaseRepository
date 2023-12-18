@@ -1,5 +1,8 @@
 package com.zq.tankbattle;
 
+import com.zq.tankbattle.strategy.fire.FireStrategy;
+import com.zq.tankbattle.strategy.fire.impl.DefaultFireStrategy;
+import com.zq.tankbattle.strategy.fire.impl.ShotFireStrategy;
 import lombok.Data;
 
 import java.awt.*;
@@ -19,14 +22,13 @@ public class Tank {
     public boolean xtrue;
 
     //位置
-    private int x, y = 200;
+    int x, y = 200;
     //方向
     private Dir dir = Dir.DOWN;
     //敌方坦克移动速度
     final int badSpeed = 1;
     //我方坦克移动速度
-
-    final int goodSpeed = 3;
+    public static int goodSpeed = 3;
 
     int incepetion = 0;
 
@@ -67,9 +69,6 @@ public class Tank {
         rect.width = WIDTH;
         rect.height = HEIGHT;
     }
-
-
-
 
 
     public void paint(Graphics g) {
@@ -156,17 +155,17 @@ public class Tank {
 
 
         if (group == Group.BAD && random.nextInt(50) > 48) {
-            this.fire();
+            this.fire(DefaultFireStrategy.getInstance());
         } else if (group == Group.GOOD && null != tf.event && tf.event.getKeyCode() == KeyEvent.VK_SPACE) {
-            this.fire();
+            this.fire(ShotFireStrategy.getInstance());
         }
 
         //边界检测
         boundsCheck();
 
         //坦克矩形的位置要跟着移动变化
-        rect.x=x;
-        rect.y=y;
+        rect.x = x;
+        rect.y = y;
 
     }
 
@@ -189,11 +188,8 @@ public class Tank {
      * Date: 2023/12/14
      * Decription: 开火
      */
-    public void fire() {
-
-        int bx = this.x + Tank.WIDTH / 2 - Shell.WIDTH / 2;
-        int by = this.y + Tank.HEIGHT / 2 - Shell.HEIGHT / 2;
-        tf.shellList.add(new Shell(bx, by, this.dir, this.group, tf));
+    public void fire(FireStrategy f) {
+        f.fire(this);
     }
 
     /**
@@ -203,8 +199,8 @@ public class Tank {
      */
     public void die() {
         this.living = false;
-        int eX = this.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-        int eY = this.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+        int eX = this.x + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+        int eY = this.y + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
         tf.blowUpList.add(new Explode(eX, eY, tf));
     }
 
@@ -273,10 +269,10 @@ public class Tank {
     }
 
     /**
-      Author: ZQ
-      Date: 2023/12/15
-      Decription: 返回坦克矩形
-    */
+     * Author: ZQ
+     * Date: 2023/12/15
+     * Decription: 返回坦克矩形
+     */
     public Rectangle rect() {
         return rect;
     }

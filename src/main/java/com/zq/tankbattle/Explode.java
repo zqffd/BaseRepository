@@ -43,7 +43,8 @@ public class Explode {
 
 
     public void paint(Graphics g) {
-        CompletableFuture.runAsync(()->audio.play());
+        //声音
+//        CompletableFuture.runAsync(()->audio.play());
         g.drawImage(ResourceMgr.blowUpList[step++], x, y, null);
 
         if(step >= ResourceMgr.blowUpList.length)

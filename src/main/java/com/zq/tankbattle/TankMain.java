@@ -21,7 +21,7 @@ public class TankMain {
 
         //每25毫秒刷新一次，延迟25ms
         while (true) {
-            Thread.sleep(25);
+            Thread.sleep(30);
             t.repaint();
         }
     }

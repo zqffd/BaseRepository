@@ -13,9 +13,9 @@ import java.util.Properties;
 /**
  * 作者:ZQ
  * 时间:2023/12/15 16:03
+ * 读取配置文件数据
  */
 @Component
-@Slf4j
 public class TankCommon {
 
 
@@ -51,9 +51,8 @@ public class TankCommon {
      * Date: 2023/12/18
      * Decription: 返回字符串类型的值
      */
-    public static String getStringValue(String key) {
-        return (String) mainConfig(key);
-    }
+    public static String getStringValue(String key) {return (String) mainConfig(key);}
+
 
 
     /**
@@ -63,7 +62,7 @@ public class TankCommon {
      */
     public static Object mainConfig(String key) {
         try {
-            //只需要加载一次
+            //只需要加载一次，这里采用懒加载方式
             if (ObjectUtils.isEmpty(properties)) {
                 synchronized (TankCommon.class){
                     if (ObjectUtils.isEmpty(properties)){

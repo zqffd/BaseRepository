@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    thislocalhist:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: qq2453539
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/tank_battle?allowMultiQueries=true
+      type: com.alibaba.druid.pool.DruidDataSource
+

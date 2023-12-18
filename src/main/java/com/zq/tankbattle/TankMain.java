@@ -12,15 +12,15 @@ public class TankMain {
     public static void main(String[] args) throws InterruptedException {
 
         //每隔50毫秒刷新窗口
-        TankFrame t=new TankFrame();
+        TankFrame t = new TankFrame();
 
         //初始化地方坦克
         for (int j = 0; j < TankCommon.getIntValue("badTankNum"); j++) {
-            t.tankList.add(new Tank(50+j*80,200,Dir.DOWN,Group.BAD, t));
+            t.tankList.add(new Tank(50 + j * 80, 200, Dir.DOWN, Group.BAD, t));
         }
 
         //每25毫秒刷新一次，延迟25ms
-        while (true){
+        while (true) {
             Thread.sleep(25);
             t.repaint();
         }
@@ -28,14 +28,4 @@ public class TankMain {
 
 
 
-//    public static void main(String[] args) {
-//
-//
-//        for (int i = 0; i < 2; i++) {
-//            System.out.println(TankCommon.getIntValue("badTankNum"));
-//
-//
-//        }
-//
-//    }
 }

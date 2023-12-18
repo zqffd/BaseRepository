@@ -48,7 +48,16 @@ public class TankTest {
 
     @Test
     public void imageTest2(){
-        System.out.println("数量："+ TankCommon.getBadTankNum());
+        for (int i = 0; i <2 ; i++) {
+            if (i==0){
+                System.out.println(TankCommon.getIntValue("badTankNum"));
+
+            }else {
+                String badTankSize = TankCommon.getStringValue("badTankSize");
+                System.out.println(TankCommon.getStringValue("badTankSize"));
+            }
+        }
+
 
 
 

@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableScheduling
-@PropertySource(value = {"classpath:application-dev.properties"})
+@PropertySource(value = "classpath:application-dev.properties",encoding = "UTF-8")
 public class TankBattleApplication {
     public static void main(String[] args){
         SpringApplication.run(TankBattleApplication.class,args);

@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * 作者:ZQ
  * 时间:2023/12/14 14:54
- * 加载所有的文件资源
+ * 加载所有的文件资源,目前是饿汉式单例
  */
 public class ResourceMgr {
     public static BufferedImage tankLeft, tankR, tankUP, tankD, tankUL, tankDL, tankUR, tankDR;
@@ -19,6 +19,16 @@ public class ResourceMgr {
     public static BufferedImage bulletL, bulletR, bulletU, bulletD, bulletUL, bulletDL, bulletUR, bulletDR;
     public static BufferedImage meBulletL, meBulletR, meBulletU, meBulletD, meBulletUL, meBulletDL, meBulletUR, meBulletDR;
     public static BufferedImage[] blowUpList = new BufferedImage[16];
+
+    private static final ResourceMgr RESOURCE_MGR = new ResourceMgr();
+
+    public static ResourceMgr getInstance(){
+        return ResourceMgr.RESOURCE_MGR;
+    }
+
+    private ResourceMgr() {}
+
+
 
     //class加载到内存的时候，直接加载所有文件
     static {

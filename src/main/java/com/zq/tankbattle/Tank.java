@@ -2,7 +2,7 @@ package com.zq.tankbattle;
 
 import com.zq.tankbattle.strategy.fire.FireStrategy;
 import com.zq.tankbattle.strategy.fire.impl.DefaultFireStrategy;
-import com.zq.tankbattle.strategy.fire.impl.ShotFireStrategy;
+import com.zq.tankbattle.strategy.fire.impl.AllFireStrategy;
 import lombok.Data;
 
 import java.awt.*;
@@ -168,7 +168,7 @@ public class Tank {
         if (group == Group.BAD && random.nextInt(50) > 48) {
             this.fire(DefaultFireStrategy.getInstance());
         } else if (group == Group.GOOD && null != tf.event && tf.event.getKeyCode() == KeyEvent.VK_SPACE) {
-            this.fire(ShotFireStrategy.getInstance());
+            this.fire(AllFireStrategy.getInstance());
         }
 
         //边界检测

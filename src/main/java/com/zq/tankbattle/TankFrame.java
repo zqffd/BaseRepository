@@ -2,8 +2,8 @@ package com.zq.tankbattle;
 
 import com.zq.tankbattle.strategy.fire.impl.DefaultFireStrategy;
 import com.zq.tankbattle.strategy.fire.impl.FlayFireStrategy;
+import com.zq.tankbattle.strategy.fire.impl.AllFireStrategy;
 import com.zq.tankbattle.strategy.fire.impl.ShotFireStrategy;
-import org.apache.commons.lang3.compare.ComparableUtils;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -28,8 +28,10 @@ public class TankFrame extends Frame {
     //窗口的高度
     static final int GAME_HEIGHT = 800;
 
-    //让其他线程可见，
-    volatile int skillCountDown = 0;
+    //R 让其他线程可见，
+    volatile int allCountDown = 0;
+    //E
+    volatile int shotCountDown = 0;
 
     KeyEvent event = null;
 
@@ -43,7 +45,7 @@ public class TankFrame extends Frame {
     List<Explode> blowUpList = new ArrayList<>();
 
     //杀敌数
-    int kills=0;
+    int kills = 0;
 
     int x1 = 200;
     int y1 = 200;
@@ -116,15 +118,17 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        String skillStr = skillCountDown == 0 ? "√" : skillCountDown + "";
+        String skillStr = shotCountDown == 0 ? "√" : shotCountDown + "";
+        String allStr = allCountDown == 0 ? "√" : allCountDown + "";
         Color color = g.getColor();
         g.setColor(Color.GREEN);
         g.drawString("子弹数量：" + shellList.size(), 10, 60);
         g.drawString("坦克数量：" + tankList.size(), 10, 80);
         g.drawString("爆炸数量" + blowUpList.size(), 10, 100);
         g.setColor(Color.CYAN);
-        g.drawString("散射技能CD：" + skillStr, 900, 100);
-        g.drawString("杀敌数：" + kills, 900, 120);
+        g.drawString("分散R技能CD：" + allStr, 900, 100);
+        g.drawString("散射E技能CD：" + skillStr, 900, 120);
+        g.drawString("杀敌数：" + kills, 900, 140);
         g.setColor(color);
 
         tank.paint(g);
@@ -227,17 +231,29 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_SPACE:
                     tank.fire(DefaultFireStrategy.getInstance());
                     break;
-                //R 散射
+                //R 全力分散
                 case KeyEvent.VK_R:
-                    if (skillCountDown == 0) {
-                        skillCountDown = ShotFireStrategy.skillCountDown;
+                    if (allCountDown == 0) {
+                        allCountDown = AllFireStrategy.skillCountDown;
                         //异步执行倒计时
-                        CompletableFuture.runAsync(() -> countDown());
+                        CompletableFuture.runAsync(() -> countDown("R"));
+
+                        //释放技能
+                        tank.fire(AllFireStrategy.getInstance());
+                    }
+
+                    break;
+                //E 散射
+                case KeyEvent.VK_E:
+                    //TODO 目前仅支持向上的散射，不支持任意角度散射,需要传入坦克方向，对不同的方向释放散射
+                    if (shotCountDown == 0 && tank.getDir() == Dir.UP) {
+                        shotCountDown = ShotFireStrategy.skillCountDown;
+                        //异步执行倒计时
+                        CompletableFuture.runAsync(() -> countDown("E"));
 
                         //释放技能
                         tank.fire(ShotFireStrategy.getInstance());
                     }
-
                     break;
                 case KeyEvent.VK_Q:
                     tank.fire(FlayFireStrategy.getInstance());
@@ -307,17 +323,33 @@ public class TankFrame extends Frame {
      * Date: 2023/12/19
      * Decription: 倒计时
      */
-    public void countDown() {
+    public void countDown(String scann) {
         try {
-            if (skillCountDown <= 0) {
-                skillCountDown = 0;
-                return;
+            switch (scann) {
+                case "R":
+                    if (allCountDown <= 0) {
+                        allCountDown = 0;
+                        return;
+                    }
+                    for (int i = 0; i < AllFireStrategy.skillCountDown; i++) {
+                        Thread.sleep(1000); // 暂停1秒
+                        allCountDown--;
+                    }
+                    break;
+                case "E":
+                    if (shotCountDown <= 0) {
+                        shotCountDown = 0;
+                        return;
+                    }
+
+                    for (int i = 0; i < ShotFireStrategy.skillCountDown; i++) {
+                        Thread.sleep(1000); // 暂停1秒
+                        shotCountDown--;
+                    }
+                    break;
             }
 
-            for (int i = 0; i < ShotFireStrategy.skillCountDown; i++) {
-                Thread.sleep(1000); // 暂停1秒
-                skillCountDown--;
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -8,15 +8,14 @@ import java.awt.image.BufferedImage;
  * 时间:2023/12/14 10:03
  * 发射炮弹实体类
  */
-public class Shell{
+public class Shell {
 
     //移动速度
     public static final int SPEED = 10;
 
     //大小
-    public static  int WIDTH = ResourceMgr.bulletD.getWidth();
+    public static int WIDTH = ResourceMgr.bulletD.getWidth();
     public static int HEIGHT = ResourceMgr.bulletD.getHeight();
-
 
 
     int x, y;
@@ -33,16 +32,17 @@ public class Shell{
     //区分敌方子弹还是我方子弹
     public Group group = Group.BAD;
 
+
     public TankFrame tf;
 
-    public  Rectangle rect =  new Rectangle();
+    public Rectangle rect = new Rectangle();
 
 
-    public Shell(int x, int y, Dir dir, Group group , TankFrame tf) {
+    public Shell(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.group=group;
+        this.group = group;
         this.tf = tf;
         rect.x = x;
         rect.y = y;
@@ -59,7 +59,7 @@ public class Shell{
         }
         BufferedImage tankD = null;
 
-        switch (dir){
+        switch (dir) {
             case DOWN:
                 tankD = ResourceMgr.bulletD;
                 break;
@@ -84,15 +84,37 @@ public class Shell{
             case UR:
                 tankD = ResourceMgr.bulletUR;
                 break;
+            case UR1:
+                tankD = ResourceMgr.bulletUR1;
+                break;
+            case UR2:
+                tankD = ResourceMgr.bulletUR2;
+                break;
+            case UR3:
+                tankD = ResourceMgr.bulletUR3;
+                break;
+            case UR4:
+                tankD = ResourceMgr.bulletUR4;
+                break;
+            case UL1:
+                tankD = ResourceMgr.bulletUL1;
+                break;
+            case UL2:
+                tankD = ResourceMgr.bulletUL2;
+                break;
+            case UL3:
+                tankD = ResourceMgr.bulletUL3;
+                break;
+            case UL4:
+                tankD = ResourceMgr.bulletUL4;
+                break;
             default:
                 break;
         }
 
 
         //画一张图片
-        g.drawImage(tankD,x,y,null);
-
-
+        g.drawImage(tankD, x, y, null);
 
 
         move();
@@ -141,6 +163,43 @@ public class Shell{
                 y -= SPEED;
                 x -= SPEED;
                 break;
+
+        }
+
+        switch (dir){
+            case UL1:
+                y -= SPEED;
+                x -= SPEED-8;
+                break;
+            case UL2:
+                y -= SPEED;
+                x -= SPEED-6;
+                break;
+            case UL3:
+                y -= SPEED;
+                x -= SPEED-4;
+                break;
+            case UL4:
+                y -= SPEED;
+                x -= SPEED-2;
+                break;
+            case UR1:
+                y -= SPEED;
+                x += SPEED-8;
+                break;
+            case UR2:
+                y -= SPEED;
+                x += SPEED-6;
+                break;
+            case UR3:
+                y -= SPEED;
+                x += SPEED-4;
+            case UR4:
+                y -= SPEED;
+                x += SPEED-2;
+                break;
+            default:
+                break;
         }
 
 
@@ -150,8 +209,8 @@ public class Shell{
 
 
         //子弹的矩形要跟着移动而变化
-        rect.x=x;
-        rect.y=y;
+        rect.x = x;
+        rect.y = y;
 
     }
 
@@ -161,7 +220,7 @@ public class Shell{
         if (this.group == tank.getGroup()) return;
 
         ////获取子弹矩形和坦克矩形，判断子弹和坦克的方块是否相交,发生相交，两个都消失
-        if (rect.intersects(tank.rect())){
+        if (rect.intersects(tank.rect())) {
             tank.die();
             this.die();
         }
@@ -170,10 +229,10 @@ public class Shell{
     }
 
     /**
-      Author: ZQ
-      Date: 2023/12/14
-      Decription: 子弹是否活着
-    */
+     * Author: ZQ
+     * Date: 2023/12/14
+     * Decription: 子弹是否活着
+     */
     private void die() {
         this.living = false;
     }

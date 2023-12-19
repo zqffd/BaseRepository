@@ -11,14 +11,14 @@ import com.zq.tankbattle.strategy.fire.FireStrategy;
  * 时间:2023/12/18 16:00
  * 开火策略模式的实现类：散射
  */
-public class ShotFireStrategy implements FireStrategy {
+public class AllFireStrategy implements FireStrategy {
 
 
-    private ShotFireStrategy(){}
-    private static final ShotFireStrategy INSTANCE=new ShotFireStrategy();
+    private AllFireStrategy(){}
+    private static final AllFireStrategy INSTANCE=new AllFireStrategy();
 
 
-    public static ShotFireStrategy getInstance(){return ShotFireStrategy.INSTANCE;}
+    public static AllFireStrategy getInstance(){return AllFireStrategy.INSTANCE;}
 
     //技能CD
     public static int skillCountDown = 5;
@@ -28,13 +28,8 @@ public class ShotFireStrategy implements FireStrategy {
         TankFrame tf = tank.getTf();
         int bx = tank.getX() + Tank.WIDTH / 2 - Shell.WIDTH / 2;
         int by = tank.getY() + Tank.HEIGHT / 2 - Shell.HEIGHT / 2;
-        Dir[] dirs=Dir.getShots();
+        Dir[] dirs=Dir.getAlls();
         for (Dir dir : dirs) {
-
-
-
-
-
             new Shell(bx, by, dir, tank.getGroup(), tf);
         }
     }

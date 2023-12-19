@@ -17,6 +17,7 @@ public class ResourceMgr {
     public static BufferedImage tankLeft, tankR, tankUP, tankD, tankUL, tankDL, tankUR, tankDR;
     public static BufferedImage meTankLeft, meTankR, meTankUP, meTankD, meTankUL, meTankDL, meTankUR, meTankDR;
     public static BufferedImage bulletL, bulletR, bulletU, bulletD, bulletUL, bulletDL, bulletUR, bulletDR;
+    public static BufferedImage bulletUL1, bulletUL2, bulletUL3, bulletUL4, bulletUR1, bulletUR2, bulletUR3, bulletUR4;
     public static BufferedImage meBulletL, meBulletR, meBulletU, meBulletD, meBulletUL, meBulletDL, meBulletUR, meBulletDR;
     public static BufferedImage[] blowUpList = new BufferedImage[16];
     public static BufferedImage hp100, hp80, hp60, hp40, hp20;
@@ -61,8 +62,19 @@ public class ResourceMgr {
             bulletL = ImageUtil.rotateImage(bulletU, -90);
             bulletR = ImageUtil.rotateImage(bulletU, 90);
             bulletD = ImageUtil.rotateImage(bulletU, 180);
+            bulletUL1 = ImageUtil.rotateImage(bulletU, -10);
+            bulletUL2 = ImageUtil.rotateImage(bulletU, -20);
+            bulletUL3 = ImageUtil.rotateImage(bulletU, -30);
+            bulletUL4 = ImageUtil.rotateImage(bulletU, -40);
             bulletUL = ImageUtil.rotateImage(bulletU, -45);
+
+            bulletUR1 = ImageUtil.rotateImage(bulletU, 10);
+            bulletUR2 = ImageUtil.rotateImage(bulletU, 20);
+            bulletUR3 = ImageUtil.rotateImage(bulletU, 30);
+            bulletUR4 = ImageUtil.rotateImage(bulletU, 40);
             bulletUR = ImageUtil.rotateImage(bulletU, 45);
+
+
             bulletDR = ImageUtil.rotateImage(bulletD, -45);
             bulletDL = ImageUtil.rotateImage(bulletD, 45);
 

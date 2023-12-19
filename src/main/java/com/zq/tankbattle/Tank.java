@@ -208,7 +208,8 @@ public class Tank {
      */
     public void die() {
         HP = this.HP-20;
-        if (num == 100/20){
+        if (num == (100/20)-1){
+            tf.kills++;
             this.living = false;
         }else {
             num++;

@@ -3,6 +3,7 @@ package com.zq.tankbattle;
 import com.zq.tankbattle.strategy.fire.impl.DefaultFireStrategy;
 import com.zq.tankbattle.strategy.fire.impl.FlayFireStrategy;
 import com.zq.tankbattle.strategy.fire.impl.ShotFireStrategy;
+import org.apache.commons.lang3.compare.ComparableUtils;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -11,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * 作者:ZQ
@@ -26,6 +28,9 @@ public class TankFrame extends Frame {
     //窗口的高度
     static final int GAME_HEIGHT = 800;
 
+    //让其他线程可见，
+    volatile int skillCountDown = 0;
+
     KeyEvent event = null;
 
     //子弹容器
@@ -38,7 +43,7 @@ public class TankFrame extends Frame {
     List<Explode> blowUpList = new ArrayList<>();
 
     //杀敌数
-    List<Explode> killsList = new ArrayList<>();
+    int kills=0;
 
     int x1 = 200;
     int y1 = 200;
@@ -111,13 +116,16 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
+        String skillStr = skillCountDown == 0 ? "√" : skillCountDown + "";
         Color color = g.getColor();
         g.setColor(Color.GREEN);
         g.drawString("子弹数量：" + shellList.size(), 10, 60);
         g.drawString("坦克数量：" + tankList.size(), 10, 80);
         g.drawString("爆炸数量" + blowUpList.size(), 10, 100);
+        g.setColor(Color.CYAN);
+        g.drawString("散射技能CD：" + skillStr, 900, 100);
+        g.drawString("杀敌数：" + kills, 900, 120);
         g.setColor(color);
-
 
         tank.paint(g);
         //这里用原始循环，不能用fore，用fore会加锁，锁住list的数量，数量如果发生改变会报错
@@ -181,7 +189,7 @@ public class TankFrame extends Frame {
                     D = true;
                     break;
                 case KeyEvent.VK_SHIFT:
-                    tank.goodSpeed=6;
+                    tank.goodSpeed = 6;
                     break;
 //                //空格
 //                case KeyEvent.VK_SPACE:
@@ -221,14 +229,22 @@ public class TankFrame extends Frame {
                     break;
                 //R 散射
                 case KeyEvent.VK_R:
-                    tank.fire(ShotFireStrategy.getInstance());
+                    if (skillCountDown == 0) {
+                        skillCountDown = ShotFireStrategy.skillCountDown;
+                        //异步执行倒计时
+                        CompletableFuture.runAsync(() -> countDown());
+
+                        //释放技能
+                        tank.fire(ShotFireStrategy.getInstance());
+                    }
+
                     break;
                 case KeyEvent.VK_Q:
                     tank.fire(FlayFireStrategy.getInstance());
                     break;
                 //shift 加速
                 case KeyEvent.VK_SHIFT:
-                    tank.goodSpeed=3;
+                    tank.goodSpeed = 3;
                     break;
                 default:
                     break;
@@ -286,4 +302,25 @@ public class TankFrame extends Frame {
     }
 
 
+    /**
+     * Author: ZQ
+     * Date: 2023/12/19
+     * Decription: 倒计时
+     */
+    public void countDown() {
+        try {
+            if (skillCountDown <= 0) {
+                skillCountDown = 0;
+                return;
+            }
+
+            for (int i = 0; i < ShotFireStrategy.skillCountDown; i++) {
+                Thread.sleep(1000); // 暂停1秒
+                skillCountDown--;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }

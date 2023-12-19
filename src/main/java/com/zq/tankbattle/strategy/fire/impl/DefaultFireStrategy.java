@@ -14,7 +14,8 @@ public class DefaultFireStrategy implements FireStrategy {
 
 
 
-    private DefaultFireStrategy(){}
+    private DefaultFireStrategy() {
+    }
 
     private static final DefaultFireStrategy INSTANCE = new DefaultFireStrategy();
 
@@ -31,8 +32,6 @@ public class DefaultFireStrategy implements FireStrategy {
         int by = tank.getY() + Tank.HEIGHT / 2 - Shell.HEIGHT / 2;
         new Shell(bx, by, tank.getDir(), tank.getGroup(), tf);
     }
-
-
 
 
 }

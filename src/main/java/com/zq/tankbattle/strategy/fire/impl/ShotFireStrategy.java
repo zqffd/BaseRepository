@@ -20,6 +20,9 @@ public class ShotFireStrategy implements FireStrategy {
 
     public static ShotFireStrategy getInstance(){return ShotFireStrategy.INSTANCE;}
 
+    //技能CD
+    public static int skillCountDown = 5;
+
     @Override
     public void fire(Tank tank) {
         TankFrame tf = tank.getTf();
@@ -29,5 +32,9 @@ public class ShotFireStrategy implements FireStrategy {
         for (Dir dir : dirs) {
             new Shell(bx, by, dir, tank.getGroup(), tf);
         }
+    }
+
+    public static int getSkillCountDown() {
+        return skillCountDown;
     }
 }

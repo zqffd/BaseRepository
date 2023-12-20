@@ -1,6 +1,6 @@
-package com.zq.tankbattle;
+package com.zq.tankbattle.abstractfactory;
 
-import com.zq.tankbattle.abstractfactory.BaseShell;
+import com.zq.tankbattle.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
  * 时间:2023/12/14 10:03
  * 发射炮弹实体类
  */
-public class Shell extends BaseShell {
+public class GreenShell extends BaseShell{
 
     //移动速度
     public static final int SPEED = 10;
@@ -40,7 +40,7 @@ public class Shell extends BaseShell {
     public Rectangle rect = new Rectangle();
 
 
-    public Shell(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public GreenShell(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;

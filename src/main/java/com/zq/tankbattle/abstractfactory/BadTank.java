@@ -1,8 +1,9 @@
-package com.zq.tankbattle;
+package com.zq.tankbattle.abstractfactory;
 
+import com.zq.tankbattle.*;
 import com.zq.tankbattle.strategy.fire.FireStrategy;
-import com.zq.tankbattle.strategy.fire.impl.DefaultFireStrategy;
 import com.zq.tankbattle.strategy.fire.impl.AllFireStrategy;
+import com.zq.tankbattle.strategy.fire.impl.DefaultFireStrategy;
 import lombok.Data;
 
 import java.awt.*;
@@ -17,7 +18,7 @@ import java.util.Random;
  * 坦克实体类
  */
 @Data
-public class Tank {
+public class BadTank extends BaseTank{
     public boolean ytrue;
 
     public boolean xtrue;
@@ -63,7 +64,7 @@ public class Tank {
     //是否移动
     private boolean moving = true;
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public BadTank(int x, int y, Dir dir, Group group, TankFrame tf) {
         super();
         this.x = x;
         this.y = y;
@@ -186,8 +187,8 @@ public class Tank {
     private void boundsCheck() {
         if (this.x < 2) x = 2;
         if (this.y < 28) y = 28;
-        if (this.x > TankFrame.GAME_WIDIH - Tank.WIDTH - 2) x = TankFrame.GAME_HEIGHT - Tank.WIDTH - 2;
-        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2) y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
+        if (this.x > TankFrame.GAME_WIDIH - BadTank.WIDTH - 2) x = TankFrame.GAME_HEIGHT - BadTank.WIDTH - 2;
+        if (this.y > TankFrame.GAME_HEIGHT - BadTank.HEIGHT - 2) y = TankFrame.GAME_HEIGHT - BadTank.HEIGHT - 2;
     }
 
     /**
@@ -196,7 +197,7 @@ public class Tank {
      * Decription: 开火
      */
     public void fire(FireStrategy f) {
-        f.fire(this);
+//        f.fire(this);
     }
 
     /**
@@ -213,8 +214,8 @@ public class Tank {
             num++;
             selectHPMgr(this.HP);
         }
-        int eX = this.x + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-        int eY = this.y + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+        int eX = this.x + BadTank.WIDTH / 2 - Explode.WIDTH / 2;
+        int eY = this.y + BadTank.HEIGHT / 2 - Explode.HEIGHT / 2;
         tf.blowUpList.add(new Explode(eX, eY, tf));
     }
 

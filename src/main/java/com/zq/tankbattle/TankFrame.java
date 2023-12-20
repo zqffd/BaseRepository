@@ -1,5 +1,7 @@
 package com.zq.tankbattle;
 
+import com.zq.tankbattle.abstractfactory.BaseShell;
+import com.zq.tankbattle.abstractfactory.GreenShell;
 import com.zq.tankbattle.strategy.fire.impl.DefaultFireStrategy;
 import com.zq.tankbattle.strategy.fire.impl.FlayFireStrategy;
 import com.zq.tankbattle.strategy.fire.impl.AllFireStrategy;
@@ -24,28 +26,28 @@ public class TankFrame extends Frame {
 
     Tank tank = new Tank(200, 400, Dir.STOP, Group.GOOD, this);
     //窗口的宽度
-    static final int GAME_WIDIH = 1024;
+    public static final int GAME_WIDIH = 1024;
     //窗口的高度
-    static final int GAME_HEIGHT = 800;
+    public static final int GAME_HEIGHT = 800;
 
     //R 让其他线程可见，
     volatile int allCountDown = 0;
     //E
     volatile int shotCountDown = 0;
 
-    KeyEvent event = null;
+    public KeyEvent event = null;
 
     //子弹容器
-    List<Shell> shellList = new ArrayList<>();
+    public List<BaseShell> shellList = new ArrayList<>();
 
     //敌方坦克
-    List<Tank> tankList = new ArrayList<>();
+    public List<Tank> tankList = new ArrayList<>();
 
     //炸弹特效集合
-    List<Explode> blowUpList = new ArrayList<>();
+    public List<Explode> blowUpList = new ArrayList<>();
 
     //杀敌数
-    int kills = 0;
+    public int kills = 0;
 
     int x1 = 200;
     int y1 = 200;

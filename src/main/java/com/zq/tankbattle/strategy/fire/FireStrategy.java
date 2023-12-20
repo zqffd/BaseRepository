@@ -1,6 +1,8 @@
 package com.zq.tankbattle.strategy.fire;
 
 import com.zq.tankbattle.Tank;
+import com.zq.tankbattle.abstractfactory.BadTank;
+import com.zq.tankbattle.abstractfactory.BaseTank;
 
 /**
  * 作者:ZQ

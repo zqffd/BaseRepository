@@ -4,6 +4,8 @@ import com.zq.tankbattle.Dir;
 import com.zq.tankbattle.Shell;
 import com.zq.tankbattle.Tank;
 import com.zq.tankbattle.TankFrame;
+import com.zq.tankbattle.abstractfactory.BadTank;
+import com.zq.tankbattle.abstractfactory.BaseTank;
 import com.zq.tankbattle.strategy.fire.FireStrategy;
 
 /**
@@ -20,11 +22,13 @@ public class ShotFireStrategy implements FireStrategy {
 
     public static ShotFireStrategy getInstance(){return ShotFireStrategy.INSTANCE;}
 
+
     //技能CD
     public static int skillCountDown = 5;
 
     @Override
-    public void fire(Tank tank) {
+    public void fire(Tank tank)
+    {
         TankFrame tf = tank.getTf();
         int bx = tank.getX() + Tank.WIDTH / 2 - Shell.WIDTH / 2;
         int by = tank.getY() + Tank.HEIGHT / 2 - Shell.HEIGHT / 2;

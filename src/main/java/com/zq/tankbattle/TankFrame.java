@@ -2,10 +2,7 @@ package com.zq.tankbattle;
 
 import com.zq.tankbattle.abstractfactory.BaseShell;
 import com.zq.tankbattle.abstractfactory.GreenShell;
-import com.zq.tankbattle.strategy.fire.impl.DefaultFireStrategy;
-import com.zq.tankbattle.strategy.fire.impl.FlayFireStrategy;
-import com.zq.tankbattle.strategy.fire.impl.AllFireStrategy;
-import com.zq.tankbattle.strategy.fire.impl.ShotFireStrategy;
+import com.zq.tankbattle.strategy.fire.impl.*;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -254,7 +251,7 @@ public class TankFrame extends Frame {
                         CompletableFuture.runAsync(() -> countDown("E"));
 
                         //释放技能
-                        tank.fire(ShotFireStrategy.getInstance());
+                        tank.fire(BombShotFireStrategy.getInstance());
                     }
                     break;
                 case KeyEvent.VK_Q:

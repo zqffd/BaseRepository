@@ -18,6 +18,8 @@ public class ResourceMgr {
     public static BufferedImage meTankLeft, meTankR, meTankUP, meTankD, meTankUL, meTankDL, meTankUR, meTankDR;
     public static BufferedImage bulletL, bulletR, bulletU, bulletD, bulletUL, bulletDL, bulletUR, bulletDR;
     public static BufferedImage bulletUL1, bulletUL2, bulletUL3, bulletUL4, bulletUR1, bulletUR2, bulletUR3, bulletUR4;
+    public static BufferedImage bombL, bombR, bombU, bombD, bombUL, bombDL, bombUR, bombDR;
+    public static BufferedImage bombUL1, bombUL2, bombUL3, bombUL4, bombUR1, bombUR2, bombUR3, bombUR4;
     public static BufferedImage meBulletL, meBulletR, meBulletU, meBulletD, meBulletUL, meBulletDL, meBulletUR, meBulletDR;
     public static BufferedImage[] blowUpList = new BufferedImage[16];
     public static BufferedImage hp100, hp80, hp60, hp40, hp20;
@@ -77,6 +79,27 @@ public class ResourceMgr {
 
             bulletDR = ImageUtil.rotateImage(bulletD, -45);
             bulletDL = ImageUtil.rotateImage(bulletD, 45);
+
+
+            bombU = ImageIO.read(new Utils().getStaticFile(PathUtils.SHELLPATH.path() + "爆弹.png"));
+            bombL = ImageUtil.rotateImage(bombU, -90);
+            bombR = ImageUtil.rotateImage(bombU, 90);
+            bombD = ImageUtil.rotateImage(bombU, 180);
+            bombUL1 = ImageUtil.rotateImage(bombU, -10);
+            bombUL2 = ImageUtil.rotateImage(bombU, -20);
+            bombUL3 = ImageUtil.rotateImage(bombU, -30);
+            bombUL4 = ImageUtil.rotateImage(bombU, -40);
+            bombUL = ImageUtil.rotateImage(bombU, -45);
+
+            bombUR1 = ImageUtil.rotateImage(bombU, 10);
+            bombUR2 = ImageUtil.rotateImage(bombU, 20);
+            bombUR3 = ImageUtil.rotateImage(bombU, 30);
+            bombUR4 = ImageUtil.rotateImage(bombU, 40);
+            bombUR = ImageUtil.rotateImage(bombU, 45);
+
+
+            bombDR = ImageUtil.rotateImage(bombD, -45);
+            bombDL = ImageUtil.rotateImage(bombD, 45);
 
 
             meBulletU = ImageIO.read(new Utils().getStaticFile(PathUtils.SHELLPATH.path() + "绿bulletU.gif"));

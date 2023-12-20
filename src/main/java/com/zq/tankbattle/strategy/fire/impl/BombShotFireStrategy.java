@@ -4,23 +4,22 @@ import com.zq.tankbattle.Dir;
 import com.zq.tankbattle.Shell;
 import com.zq.tankbattle.Tank;
 import com.zq.tankbattle.TankFrame;
-import com.zq.tankbattle.abstractfactory.BadTank;
-import com.zq.tankbattle.abstractfactory.BaseTank;
+import com.zq.tankbattle.abstractfactory.GreenShell;
 import com.zq.tankbattle.strategy.fire.FireStrategy;
 
 /**
  * 作者:ZQ
  * 时间:2023/12/18 16:00
- * 开火策略模式的实现类：散射
+ * 开火策略模式的实现类：爆弹散射
  */
-public class ShotFireStrategy implements FireStrategy {
+public class BombShotFireStrategy implements FireStrategy {
 
 
-    private ShotFireStrategy(){}
-    private static final ShotFireStrategy INSTANCE=new ShotFireStrategy();
+    private BombShotFireStrategy(){}
+    private static final BombShotFireStrategy INSTANCE=new BombShotFireStrategy();
 
 
-    public static ShotFireStrategy getInstance(){return ShotFireStrategy.INSTANCE;}
+    public static BombShotFireStrategy getInstance(){return BombShotFireStrategy.INSTANCE;}
 
 
     //技能CD
@@ -34,7 +33,7 @@ public class ShotFireStrategy implements FireStrategy {
         int by = tank.getY() + Tank.HEIGHT / 2 - Shell.HEIGHT / 2;
         Dir[] dirs=Dir.getShots();
         for (Dir dir : dirs) {
-            new Shell(bx, by, dir, tank.getGroup(), tf);
+            new GreenShell(bx, by, dir, tank.getGroup(), tf);
         }
     }
 }

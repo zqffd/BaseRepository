@@ -16,8 +16,8 @@ public class GreenShell extends BaseShell{
     public static final int SPEED = 10;
 
     //大小
-    public static int WIDTH = ResourceMgr.bulletD.getWidth();
-    public static int HEIGHT = ResourceMgr.bulletD.getHeight();
+    public static int WIDTH = ResourceMgr.bombD.getWidth();
+    public static int HEIGHT = ResourceMgr.bombD.getHeight();
 
 
     int x, y;
@@ -63,52 +63,52 @@ public class GreenShell extends BaseShell{
 
         switch (dir) {
             case DOWN:
-                tankD = ResourceMgr.bulletD;
+                tankD = ResourceMgr.bombD;
                 break;
             case LEFT:
-                tankD = ResourceMgr.bulletL;
+                tankD = ResourceMgr.bombL;
                 break;
             case RIGHT:
-                tankD = ResourceMgr.bulletR;
+                tankD = ResourceMgr.bombR;
                 break;
             case UP:
-                tankD = ResourceMgr.bulletU;
+                tankD = ResourceMgr.bombU;
                 break;
             case DL:
-                tankD = ResourceMgr.bulletDL;
+                tankD = ResourceMgr.bombDL;
                 break;
             case DR:
-                tankD = ResourceMgr.bulletDR;
+                tankD = ResourceMgr.bombDR;
                 break;
             case UL:
-                tankD = ResourceMgr.bulletUL;
+                tankD = ResourceMgr.bombUL;
                 break;
             case UR:
-                tankD = ResourceMgr.bulletUR;
+                tankD = ResourceMgr.bombUR;
                 break;
             case UR1:
-                tankD = ResourceMgr.bulletUR1;
+                tankD = ResourceMgr.bombUR1;
                 break;
             case UR2:
-                tankD = ResourceMgr.bulletUR2;
+                tankD = ResourceMgr.bombUR2;
                 break;
             case UR3:
-                tankD = ResourceMgr.bulletUR3;
+                tankD = ResourceMgr.bombUR3;
                 break;
             case UR4:
-                tankD = ResourceMgr.bulletUR4;
+                tankD = ResourceMgr.bombUR4;
                 break;
             case UL1:
-                tankD = ResourceMgr.bulletUL1;
+                tankD = ResourceMgr.bombUL1;
                 break;
             case UL2:
-                tankD = ResourceMgr.bulletUL2;
+                tankD = ResourceMgr.bombUL2;
                 break;
             case UL3:
-                tankD = ResourceMgr.bulletUL3;
+                tankD = ResourceMgr.bombUL3;
                 break;
             case UL4:
-                tankD = ResourceMgr.bulletUL4;
+                tankD = ResourceMgr.bombUL4;
                 break;
             default:
                 break;
